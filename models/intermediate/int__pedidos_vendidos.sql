@@ -43,7 +43,11 @@ with pedidos as (
     left join cliente on pedidos.fk_cliente = cliente.pk_cliente
     left join pagamentos on pedidos.pk_pedido = pagamentos.fk_pedido
     left join itens_pedidos on pedidos.pk_pedido = itens_pedidos.fk_pedido
-
+    group by 
+        pedidos.pk_pedido
+       , itens_pedidos.fk_produto
+       , pagamentos.pk_pagamento
+       , pedidos.fk_cliente
 
 )
 
