@@ -1,8 +1,9 @@
 with pagamentos as (
     select
         pk_pagamento
-        , fk_cliente
         , fk_pedido
+        , pagamento_id
+        , pedido_id
         , valor
         , metodo
         , data_pagamento
