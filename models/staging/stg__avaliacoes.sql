@@ -1,3 +1,4 @@
+
 with avaliacoes as (
     select
         {{ dbt_utils.generate_surrogate_key( ['cliente_id','produto_id'] ) }} as pk_avaliacao

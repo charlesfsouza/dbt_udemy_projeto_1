@@ -3,9 +3,9 @@ with itens_pedidos as (
         {{ dbt_utils.generate_surrogate_key( ['pedido_id','produto_id'] ) }} as pk_item_pedido
         , cast(pedido_id as integer) as pedido_id
         , cast(produto_id as integer) as produto_id
-        , cast(quantidade as integer) as qtd_item
-        , cast(preco_unitario as float64) as vlr_unitario
-        , cast(subtotal as float64) as vlr_total
+        , cast(quantidade as integer) as quantidade
+        , cast(preco_unitario as float64) as valor_unitario
+        , cast(subtotal as float64) as valor_total
     from {{ source('ecomerce','itens_pedidos') }}
 )
 , pedidos as (
@@ -27,9 +27,9 @@ with itens_pedidos as (
         , produtos.pk_produto as fk_produto
         , itens_pedidos.pedido_id
         , itens_pedidos.produto_id
-        , itens_pedidos.qtd_item
-        , itens_pedidos.vlr_unitario
-        , itens_pedidos.vlr_total
+        , itens_pedidos.quantidade
+        , itens_pedidos.valor_unitario
+        , itens_pedidos.valor_total
     from itens_pedidos
     left join pedidos on pedidos.pedido_id = itens_pedidos.pedido_id
     left join produtos on produtos.produto_id = itens_pedidos.produto_id

@@ -3,8 +3,8 @@ with pagamentos as (
         {{ dbt_utils.generate_surrogate_key( ['id'] ) }} as pk_pagamento
         , cast(id as integer) as pagamento_id
         , cast(pedido_id as integer) as pedido_id
-        , cast(valor as float64) as valor_pagamento
-        , cast(metodo as string) as metodo_pagamento
+        , cast(valor as float64) as valor
+        , cast(metodo as string) as metodo
         , cast(data_pagamento as date) as data_pagamento        
     from {{ source('ecomerce','pagamentos') }}
 )
@@ -20,8 +20,8 @@ with pagamentos as (
         , pedidos.pk_pedido as fk_pedido
         , pagamentos.pagamento_id
         , pagamentos.pedido_id
-        , pagamentos.valor_pagamento
-        , pagamentos.metodo_pagamento
+        , pagamentos.valor
+        , pagamentos.metodo
         , pagamentos.data_pagamento
     from pagamentos
     left join pedidos on pedidos.pedido_id = pagamentos.pedido_id
