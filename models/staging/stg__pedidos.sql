@@ -1,4 +1,20 @@
-with pedidos as (
+{{
+    config(
+        materialized = 'incremental',
+    )
+}}
+
+with source as (
+    select
+    *
+    from {{ source('ecomerce','pedidos') }}
+    
+    {% if is_incremental() %} 
+        where data_pedido >= (select max(data_pedido) from {{ this }})
+    {% endif %}
+)
+
+, pedidos as (
     select
         {{ dbt_utils.generate_surrogate_key( ['id'] ) }} as pk_pedido
         , cast(id as integer) as pedido_id
@@ -6,7 +22,7 @@ with pedidos as (
         , cast(endereco_id as integer) as endereco_id
         , cast(data_pedido as date) as data_pedido
         , cast(status as string) as status_pedido
-    from {{ source('ecomerce','pedidos') }}
+    from source
 )
 , clientes as (
     select

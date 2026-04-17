@@ -1,4 +1,6 @@
 id,cliente_id,endereco_id,data_pedido,status
+1,66117,1338,2026-04-16,pendente
+2,66117,1338,2026-04-15,pendente
 86526,66117,1338,2024-07-29,pendente
 68251,2369,563,2024-03-10,concluído
 97134,11028,772,2024-07-01,cancelado
